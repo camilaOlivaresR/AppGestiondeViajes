@@ -9,10 +9,6 @@ sus itinerarios, reservas y recomendaciones
 
 ## Capturas de Pantalla del Proyecto
 
-Incluir capturas de pantalla o imágenes que muestren el proyecto en funcionamiento.
-
-![Home](imagenes/home.png)
-Vista inicio de la aplicación.
 
 ## Prerrequisitos o Dependencias
 
