@@ -1,24 +1,56 @@
-# README
+# Titulo del proyecto
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+App gestion de viajes
 
-Things you may want to cover:
+## Descripción del proyecto
 
-* Ruby version
+web dinámica y responsive para ayudar a los usuarios a gestionar
+sus itinerarios, reservas y recomendaciones
 
-* System dependencies
+## Capturas de Pantalla del Proyecto
 
-* Configuration
+Incluir capturas de pantalla o imágenes que muestren el proyecto en funcionamiento.
 
-* Database creation
+![Home](imagenes/home.png)
+Vista inicio de la aplicación.
 
-* Database initialization
+## Prerrequisitos o Dependencias
 
-* How to run the test suite
+Lista de software y herramientas, incluyendo versiones, que necesitas para instalar y ejecutar este proyecto:
 
-* Services (job queues, cache servers, search engines, etc.)
+- Sistema Operativo (debian 11)
+- Lenguaje de programación (ruby 3.1.2p20- )
+- Framework (Rails 7.2.1)
+- Base de datos ( PostgreSQL )
 
-* Deployment instructions
 
-* ...
+
+## Instrucciones para Ejecutar el Proyecto
+
+- rails server
+
+## Instrucciones para Cargar la Base de Datos o Migrar los Modelos
+
+- rails db:create
+- rails db:migrate
+
+
+## Instrucciones para Cargar los Datos Semilla a la Base de Datos
+
+- rails db:seed
+
+
+## Credenciales de Acceso
+
+### Para Usuario Tipo Administrador
+
+- Email: administrador@mail.com
+- Contraseña: Abc123#
+
+### Para Usuario Tipo Huésped
+
+- Email: usuario@mail.com
+- Contraseña: Abc123#
+
+
+⌨️ con ❤️ por [Camila Olivares Rivera](https://github.com/camilaOlivaresR)
