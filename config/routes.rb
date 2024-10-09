@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get "pages/index"
+  get "page/index"
+  
  
   resources :bookings
   resources :recommendations, only: [:create]
