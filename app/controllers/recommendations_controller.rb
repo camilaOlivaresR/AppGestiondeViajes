@@ -5,15 +5,15 @@ class RecommendationsController < ApplicationController
 
   # POST /recommendations or /recommendations.json
   def create
-    @itinerary = Itinerary.find(params[:recomendation][:itinerary_id])
-    @recomendation = Recommendation.new(recomendation_params)
-    @recomendation.user = current_user
+    @itinerary = Itinerary.find(params[:recommendation][:itinerary_id])
+    @recommendation = Recommendation.new(recommendation_params)
+    @recommendation.user = current_user
 
     respond_to do |format|
       if @recommendation.save
-        format.html { redirect_to itinerary_path(@itinerary_id), notice: "Recommendation was successfully created." }
+        format.html { redirect_to itinerary_path(@itinerary.id), notice: "Recommendation was successfully created." }
       else
-        format.html {  redirect_to  itinerary_path(@itinerary_id), alert: 'Comment was not created.'  }
+        format.html {  redirect_to  itinerary_path(@itinerary.id), alert: 'Comment was not created.'  }
       end
     end
   end
@@ -22,6 +22,6 @@ class RecommendationsController < ApplicationController
   private
    
     def recommendation_params
-      params.require(:recommendation).permit(:content, :category => [])
+      params.require(:recommendation).permit(:content, :itinerary_id, :category => [])
     end
 end

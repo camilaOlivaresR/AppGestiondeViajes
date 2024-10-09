@@ -14,6 +14,7 @@ class ItinerariesController < ApplicationController
   def show
     @recommendation = Recommendation.new
     @itinerary = Itinerary.find(params[:id])
+    @recommendations = @itinerary.recommendations
 
   end
 
