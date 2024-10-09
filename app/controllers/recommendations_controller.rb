@@ -1,70 +1,27 @@
 class RecommendationsController < ApplicationController
-  before_action :set_recommendation, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
 
-  # GET /recommendations or /recommendations.json
-  def index
-    @recommendations = Recommendation.all
-  end
-
-  # GET /recommendations/1 or /recommendations/1.json
-  def show
-  end
-
-  # GET /recommendations/new
-  def new
-    @recommendation = Recommendation.new
-  end
-
-  # GET /recommendations/1/edit
-  def edit
-  end
+ 
 
   # POST /recommendations or /recommendations.json
   def create
-    @recommendation = Recommendation.new(recommendation_params)
+    @itinerary = Itinerary.find(params[:recomendation][:itinerary_id])
+    @recomendation = Recommendation.new(recomendation_params)
+    @recomendation.user = current_user
 
     respond_to do |format|
       if @recommendation.save
-        format.html { redirect_to @recommendation, notice: "Recommendation was successfully created." }
-        format.json { render :show, status: :created, location: @recommendation }
+        format.html { redirect_to itinerary_path(@itinerary_id), notice: "Recommendation was successfully created." }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @recommendation.errors, status: :unprocessable_entity }
+        format.html {  redirect_to  itinerary_path(@itinerary_id), alert: 'Comment was not created.'  }
       end
     end
   end
 
-  # PATCH/PUT /recommendations/1 or /recommendations/1.json
-  def update
-    respond_to do |format|
-      if @recommendation.update(recommendation_params)
-        format.html { redirect_to @recommendation, notice: "Recommendation was successfully updated." }
-        format.json { render :show, status: :ok, location: @recommendation }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @recommendation.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /recommendations/1 or /recommendations/1.json
-  def destroy
-    @recommendation.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to recommendations_path, status: :see_other, notice: "Recommendation was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recommendation
-      @recommendation = Recommendation.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
+   
     def recommendation_params
-      params.require(:recommendation).permit(:content, :category, :itinerary_id, :user_id)
+      params.require(:recommendation).permit(:content, :category => [])
     end
 end

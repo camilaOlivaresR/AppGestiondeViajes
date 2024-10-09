@@ -1,5 +1,9 @@
 class ItinerariesController < ApplicationController
-  before_action :set_itinerary, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+
+  before_action only: [:new, :create, :update, :destroy] do
+    authorize_request(["normal_user", "admin"])
+  end
 
   # GET /itineraries or /itineraries.json
   def index
@@ -8,6 +12,9 @@ class ItinerariesController < ApplicationController
 
   # GET /itineraries/1 or /itineraries/1.json
   def show
+    @recommendation = Recommendation.new
+    @itinerary = Itinerary.find(params[:id])
+
   end
 
   # GET /itineraries/new
@@ -22,10 +29,11 @@ class ItinerariesController < ApplicationController
   # POST /itineraries or /itineraries.json
   def create
     @itinerary = Itinerary.new(itinerary_params)
+    @itinerary = current_user.itineraries.build(itinerary_params)
 
     respond_to do |format|
       if @itinerary.save
-        format.html { redirect_to @itinerary, notice: "Itinerary was successfully created." }
+        format.html { redirect_to itinerary_path(@itinerary), notice: "Itinerary was successfully created." }
         format.json { render :show, status: :created, location: @itinerary }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +73,6 @@ class ItinerariesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def itinerary_params
-      params.require(:itinerary).permit(:name, :description, :star_date, :end_date, :user_id)
+      params.require(:itinerary).permit(:name, :description, :star_date, :end_date)
     end
 end
